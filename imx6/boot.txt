@@ -1,0 +1,8 @@
+load mmc ${mmcdev}:${mmcpart} 0x20000000 uTee
+load mmc ${mmcdev}:${mmcpart} 0x18000000 ${fdt_file}
+load mmc ${mmcdev}:${mmcpart} 0x12000000 zImage
+
+setenv bootargs console=ttymxc0,115200 root=/dev/mmcblk1p2
+
+bootm 0x20000000 - 0x18000000
+

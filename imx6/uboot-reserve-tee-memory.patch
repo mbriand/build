@@ -1,0 +1,21 @@
+diff --git c/arch/arm/imx-common/cpu.c w/arch/arm/imx-common/cpu.c
+index 40fe813d290b..6b7593e176e5 100644
+--- c/arch/arm/imx-common/cpu.c
++++ w/arch/arm/imx-common/cpu.c
+@@ -105,6 +105,7 @@ struct esd_mmdc_regs {
+ #define ESD_MMDC_CTL_GET_CS1(mdctl)	((ctl >> 30) & 1)
+ #define ESD_MMDC_MISC_GET_BANK(mdmisc)	((misc >> 5) & 1)
+ 
++#define TEE_RAM_SIZE	(32 * 1024 * 1024)
+ /*
+  * imx_ddr_size - return size in bytes of DRAM according MMDC config
+  * The MMDC MDCTL register holds the number of bits for row, col, and data
+@@ -128,7 +129,7 @@ unsigned imx_ddr_size(void)
+ 	if (bits == 32)
+ 		return 0xf0000000;
+ 
+-	return 1 << bits;
++	return (1 << bits) - TEE_RAM_SIZE;
+ }
+ #endif
+ 
